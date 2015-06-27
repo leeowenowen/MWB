@@ -1,0 +1,3 @@
+include ':app', ':third_party', ':base', ':pull_to_refresh_library', ':viewpagerindicator'
+project(':pull_to_refresh_library').projectDir = new File('third_party/pull_to_refresh_library')
+project(':viewpagerindicator').projectDir = new File('third_party/viewpagerindicator')
