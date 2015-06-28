@@ -1,0 +1,40 @@
+1. spawn-fastcgi
+download package and decompress
+./configure
+make
+make install
+spawn-fcgi -a 127.0.0.1 -p 8081 -f demo(可执行文件的绝对路径)
+执行这一句的时候如果报错spawn-fcgi:child exited with:127,错误原因很多,需要仔细排查,首先可以单独跑cgi程序(demo).
+我的排查过程:
+[单独执行demo:报错'error while loading shared libraries libfcgi.so.0'
+ make install fastcgi之后默认这个库是安装在/usr/local/lib中的,我们需要将
+ /usr/local/lib加入默认的链接选项中,做法为:
+ 1. 在/etc/ld.so.conf中(或.d下新建一个文件)加入'/usr/local/lib'
+ 2. 执行`ldconfig -v`
+]
+同时,由于spawn-fcgi 的 -f选项不支持(实践看来)相对路径,需要给出demo的绝对路径
+
+eg.
+    #include "fcgi_stdio.h"
+    #include <stdlib.h>
+     
+    int main(void)
+    {
+        int count = 0;
+        while (FCGI_Accept() >= 0)
+            printf("Content-type: text/html\r\n"
+            "\r\n"
+            "<title>FastCGI Hello!</title>"
+            "<h1>FastCGI Hello!</h1>"
+            "Request number %d running on host <i>%s</i>\n",
+            ++count, getenv("SERVER_NAME"));
+        return 0;
+    }
+2. fastcgi
+download from www.fastcgi.com
+./configure
+make
+make install
+遇到'EOF' error则修改
+在include/fcgio.h 文件中加入 #include<cstdio>
+

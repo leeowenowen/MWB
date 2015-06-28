@@ -1,0 +1,4 @@
+
+1. 添加mysql用户组并添加用户
+sudo groupadd mysql
+sudo useradd mysql_user_wangli -g mysql
