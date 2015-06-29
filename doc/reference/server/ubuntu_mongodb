@@ -1,0 +1,9 @@
+1.安装mongodb
+sudo apt-get install mongodb mongodb-clients mongodb-server mongodb-dev 
+pgrep mongo -l 查看进程是否启动
+sudo service mongodb start/stop/restart
+mongo回车直接进入mongodb客户端,会自动连接正在运行的Mongodb server
+命令行以函数的形式列出db.help()可以查看所有
+mongod --dbpath ~/mongo/dbpath --logpath ~/mongo/logpath --logappend &启动
+
+

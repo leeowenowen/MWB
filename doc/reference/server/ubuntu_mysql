@@ -1,0 +1,55 @@
+1.安装mysql
+sudo apt-get install mysql-server
+中间提示输入root的密码(wangli)连续两次输入即可
+sudo apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+检查是否安装成功: sudo netstat -tap | grep mysql
+如果看到mysql的socket处于listen状态则表示安装成功
+
+2 登录mysql
+mysql -u root -p 
+mysql -h host_ip -u user -p password
+然后根据提示输入密码
+show databases : 查看当前所有数据库
+create database db_name:创建数据库
+drop database db_name:删除数据库
+use mysql:链接数据库
+exit:退出
+grant select on database_name.* to sb identified by 'password':添加用户并设置权限
+select :等同于其他语言中的printf
+(select database(); select version(); select now(); select dayofmonth(current_date); 
+ select 'hello world'; select 3*3; select concat('a','b'))
+create table table_name():创建表
+## create table users( id int not null primary key auto_increment, name char(20) not null, sex int not null default 0);
+desc table_name: 获取表结构
+drop table table_name:删除表
+insert into table_name (xxx) values ():插入数据
+## insert into users values(1, 'wangli', 0),(2, 'niuyun', 1);
+rename table table_name_src to table_name_dest;
+mysqldump -u root -p mwb user >user_tbl;导出数据库
+mysqldump -u root -p mwb > mwb_db;
+
+mysql -u root -p < ~/test.sql :从脚本执行
+
+
+3.修改密码
+mysqladmin -u root -p password new_password
+然后根据提示输入密码
+
+3. 编译mysql client code
+g++ -Wall mysql-client.cpp -o mysql-client -lmysqlclient
+
+
+1. 添加mysql用户组并添加用户
+sudo groupadd mysql
+sudo useradd mysql_user_wangli -g mysql
+
+
+mysql 默认配置文件
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+The following groups are read: mysql client
+
+
+ref: http://www.cnblogs.com/zhuyp1015/p/3562346.html
+

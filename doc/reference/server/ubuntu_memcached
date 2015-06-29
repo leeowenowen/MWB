@@ -1,0 +1,10 @@
+1.安装 
+sudo apt-get install memcached: memcached server
+memcached -p 10000 -m 64m -d -vv:启动
+set foo 0 0 20 (ctrl + enter):设置
+foo_value
+
+get foo: 读取
+
+stats items
+stats
