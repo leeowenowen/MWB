@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -17,6 +18,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("tools/keystore/release.jks")
+            storePassword "wangli"
+            keyAlias "wangli"
+            keyPassword "wangli"
+        }
+        release {
+            storeFile file("tools/keystore/release.jks")
+            storePassword "wangli"
+            keyAlias "wangli"
+            keyPassword "wangli"
+        }
+    }
 }
 
 dependencies {
@@ -27,4 +43,22 @@ dependencies {
     compile project(':base')
     compile project(':pull_to_refresh_library')
     compile project(':viewpagerindicator')
+
+    compile 'com.edmodo:cropper:1.0.1'
+    compile 'com.alibaba:fastjson:1.1.52.android'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.google.dagger:dagger-compiler:2.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    compile 'io.reactivex:rxandroid:1.2.0'
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'io.reactivex:rxjava-guava:1.0.3'
+    compile 'io.reactivex:rxjava-string:1.1.0'
+    compile 'io.reactivex:rxjava-file-utils:0.1.4'
+    compile 'io.reactivex:rxjava-joins:0.22.0'
+    compile 'io.reactivex:rxjava-async-util:0.21.0'
+    compile 'io.reactivex:rxjava-computation-expressions:0.21.0'
+
+
 }
