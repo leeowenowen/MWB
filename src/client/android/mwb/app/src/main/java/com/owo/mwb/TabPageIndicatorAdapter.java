@@ -1,9 +1,12 @@
 package com.owo.mwb;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.owo.mwb.display.DisplayListView;
 
 /**
  * Created by wangli on 16-6-5.
@@ -11,32 +14,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class TabPageIndicatorAdapter extends FragmentPagerAdapter {
 
     private String[] titles = {"0", "1", "2"};
+    private Context context;
 
 
-    public TabPageIndicatorAdapter(FragmentManager fm) {
+    public TabPageIndicatorAdapter(Context context, FragmentManager fm) {
         super(fm);
+        this.context = context;
     }
 
     @Override
     public Fragment getItem(int position) {
-        DummyFragment f = null;
         switch (position) {
             case 0:
-                f = new DummyFragment("0xxx");
-                f.color = Color.GREEN;
-                break;
+                return new ContentViewFragment().withContentView(new DisplayListView(context));
             case 1:
-                f = new DummyFragment("1xxx");
-                f.color = Color.BLUE;
-                break;
+                return new DummyFragment("1xxx").withColor(Color.BLUE);
             case 2:
-                f = new DummyFragment("2xxx");
-                f.color = Color.YELLOW;
-                break;
+                return new DummyFragment("2xxx").withColor(Color.YELLOW);
             default:
                 break;
         }
-        return f;
+        return null;
     }
 
     @Override

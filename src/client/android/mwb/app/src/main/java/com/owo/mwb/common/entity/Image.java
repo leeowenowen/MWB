@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 /**
  * Created by wangli on 16-6-5.
  */
-public class Image {
+public class Image extends com.owo.base.async.loadable.Loadable {
 
     private String url;
     private Bitmap bmp;

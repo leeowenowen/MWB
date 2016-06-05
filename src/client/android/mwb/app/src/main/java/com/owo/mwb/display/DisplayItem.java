@@ -1,4 +1,4 @@
-package com.owo.mwb.service.display.entity;
+package com.owo.mwb.display;
 
 import com.owo.mwb.common.entity.Comment;
 import com.owo.mwb.common.entity.Image;
@@ -11,6 +11,7 @@ import java.util.List;
 public class DisplayItem {
     private String id;
     private String title;
+    private String content;
     private List<Image> imgs;
     private List<Comment> comments;
 
@@ -31,6 +32,14 @@ public class DisplayItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<Image> getImgs() {

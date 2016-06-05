@@ -1,12 +1,9 @@
-package com.owo.mwb.service.display;
-
-import com.owo.mwb.service.display.entity.DisplayItem;
+package com.owo.mwb.display;
 
 import java.util.List;
 
 import retrofit2.Callback;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 /**
  * Created by wangli on 16-6-5.

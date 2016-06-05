@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initFragments() {
-        FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
+        FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(this, getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         mTabPageIndicator.setViewPager(mViewPager);
 

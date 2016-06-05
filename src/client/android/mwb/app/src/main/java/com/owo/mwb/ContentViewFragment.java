@@ -11,26 +11,20 @@ import android.widget.TextView;
 /**
  * Created by wangli on 16-6-5.
  */
-public class DummyFragment extends Fragment {
-    private String text;
-    public int color;
+public class ContentViewFragment extends Fragment {
+    private View v;
 
-    public DummyFragment(String text) {
-        super();
-        this.text = text;
+    public ContentViewFragment() {
     }
 
-    public DummyFragment withColor(int color) {
-        this.color = color;
+    public ContentViewFragment withContentView(View v) {
+        this.v = v;
         return this;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView tv = new TextView(container.getContext());
-        tv.setText(text);
-        tv.setBackgroundColor(color);
-        return tv;
+        return v;
     }
 }

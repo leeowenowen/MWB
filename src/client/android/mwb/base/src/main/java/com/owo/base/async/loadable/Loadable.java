@@ -1,4 +1,4 @@
-package com.owo.java_base.async.loadable;
+package com.owo.base.async.loadable;
 
 /**
  * Created by wangli on 15-7-1.
