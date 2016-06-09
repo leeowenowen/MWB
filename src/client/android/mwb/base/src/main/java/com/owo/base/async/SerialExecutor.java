@@ -1,17 +1,11 @@
-package com.owo.java_base.async;
+package com.owo.base.async;
 
+import java.util.Queue;
 import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * <br>==========================
- * <br> 序列Executor，保证按序执行任务。
- * <br> 开发：wangli
- * <br> 版本：1.0
- * <br> 创建时间：2015/05/05
- * <br>==========================
- */
 public class SerialExecutor implements Executor {
-    private final ArrayDequeCompat<Runnable> mTasks = new ArrayDequeCompat<Runnable>();
+    private final Queue<Runnable> mTasks = new LinkedBlockingQueue<>();
     private Runnable mActive;
 
     public synchronized void execute(final Runnable r) {

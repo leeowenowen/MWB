@@ -1,4 +1,4 @@
-package com.owo.app.common;
+package com.owo.android.util;
 
 
 import com.owo.base.BuildConfig;

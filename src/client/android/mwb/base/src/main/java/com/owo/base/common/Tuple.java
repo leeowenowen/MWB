@@ -1,4 +1,4 @@
-package com.owo.java_base.common;
+package com.owo.base.common;
 
 /**
  * <br>==========================
