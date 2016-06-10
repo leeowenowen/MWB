@@ -27,7 +27,7 @@
         <View
             android:id="@+id/id_sep"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_title_indicator_footer_line_height"
+            android:layout_height="2dp"
             android:background="@color/gray" />
 
     </LinearLayout>

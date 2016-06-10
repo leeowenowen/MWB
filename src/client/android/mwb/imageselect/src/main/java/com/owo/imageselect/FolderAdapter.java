@@ -31,11 +31,6 @@ public class FolderAdapter extends BaseAdapter {
         mImageSize = mContext.getResources().getDimensionPixelOffset(R.dimen.folder_cover_size);
     }
 
-    /**
-     * 设置数据集
-     *
-     * @param folders
-     */
     public void setData(List<Folder> folders) {
         if (folders != null && folders.size() > 0) {
             mFolders = folders;

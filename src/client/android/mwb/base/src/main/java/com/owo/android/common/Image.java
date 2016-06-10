@@ -2,7 +2,6 @@ package com.owo.android.common;
 
 import android.graphics.Bitmap;
 
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by wangli on 16-6-5.

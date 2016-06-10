@@ -65,9 +65,9 @@ public class FileUtils {
         String externalStorageState;
         try {
             externalStorageState = Environment.getExternalStorageState();
-        } catch (NullPointerException e) { // (sh)it happens (Issue #660)
+        } catch (NullPointerException e) {
             externalStorageState = "";
-        } catch (IncompatibleClassChangeError e) { // (sh)it happens too (Issue #989)
+        } catch (IncompatibleClassChangeError e) {
             externalStorageState = "";
         }
         if (preferExternal && MEDIA_MOUNTED.equals(externalStorageState) && hasExternalStoragePermission(context)) {

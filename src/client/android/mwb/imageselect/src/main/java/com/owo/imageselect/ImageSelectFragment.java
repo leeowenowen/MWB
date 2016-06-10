@@ -2,7 +2,6 @@ package com.owo.imageselect;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.owo.android.common.Image;
+import com.owo.android.util.ScreenUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -42,9 +43,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MultiImageSelectorFragment extends Fragment {
+public class ImageSelectFragment extends Fragment {
 
-    public static final String TAG = "MultiImageSelectorFragment";
+    public static final String TAG = "ImageSelectFragment";
 
     private static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 110;
     private static final int REQUEST_CAMERA = 100;
@@ -103,7 +104,7 @@ public class MultiImageSelectorFragment extends Fragment {
         try {
             mCallback = (Callback) getActivity();
         } catch (ClassCastException e) {
-            throw new ClassCastException("The Activity must implement MultiImageSelectorFragment.Callback interface...");
+            throw new ClassCastException("The Activity must implement ImageSelectFragment.Callback interface...");
         }
     }
 

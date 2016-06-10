@@ -1,5 +1,6 @@
 package com.owo.mwb.display;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,5 +16,10 @@ public class WriteDisplayActivity extends OwoBackOkActivity {
         super.onCreate(savedInstanceState);
         WriteDisplayPage page = new WriteDisplayPage(this);
         setContentView(page);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

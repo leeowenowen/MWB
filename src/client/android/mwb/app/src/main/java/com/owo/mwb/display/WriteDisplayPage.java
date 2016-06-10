@@ -1,7 +1,6 @@
 package com.owo.mwb.display;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,10 @@ import android.widget.ScrollView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.owo.android.util.ContextManager;
 import com.owo.android.util.ui.DimensionUtil;
 import com.owo.android.util.ui.ViewUtil;
 import com.owo.base.async.loadable.Loadable;
-import com.owo.components.image_select.ImageSelectActivity;
+import com.owo.imageselect.ImageSelector;
 import com.owo.mwb.R;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class WriteDisplayPage extends ScrollView {
 
     private ImgAdapter mImgAdapter = new ImgAdapter();
 
-    public WriteDisplayPage(Context context) {
+    public WriteDisplayPage(final Activity context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.write_display, this, true);
         ButterKnife.bind(this);
@@ -54,11 +52,12 @@ public class WriteDisplayPage extends ScrollView {
         idAddImg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ContextManager.activity(), ImageSelectActivity.class);
-                intent.putExtra("is_single_select", false);
-                intent.putExtra("is_wh_equal", true);
-                intent.putExtra("need_crop", false);
-                ContextManager.activity().startActivityForResult(intent, 100);
+//                Intent intent = new Intent(ContextManager.activity(), ImageSelectActivity.class);
+//                intent.putExtra("is_single_select", false);
+//                intent.putExtra("is_wh_equal", true);
+//                intent.putExtra("need_crop", false);
+//                ContextManager.activity().startActivityForResult(intent, 100);
+                ImageSelector.create(context).showCamera(true).multi().start(context, 100);
             }
         });
     }

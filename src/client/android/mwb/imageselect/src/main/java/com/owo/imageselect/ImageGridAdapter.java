@@ -50,11 +50,6 @@ public class ImageGridAdapter extends BaseAdapter {
         mGridWidth = width / column;
     }
 
-    /**
-     * 显示选择指示器
-     *
-     * @param b
-     */
     public void showSelectIndicator(boolean b) {
         showSelectIndicator = b;
     }
@@ -70,11 +65,6 @@ public class ImageGridAdapter extends BaseAdapter {
         return showCamera;
     }
 
-    /**
-     * 选择某个图片，改变选择状态
-     *
-     * @param image
-     */
     public void select(Image image) {
         if (mSelectedImages.contains(image)) {
             mSelectedImages.remove(image);
@@ -84,11 +74,6 @@ public class ImageGridAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * 通过图片路径设置默认选择
-     *
-     * @param resultList
-     */
     public void setDefaultSelected(ArrayList<String> resultList) {
         for (String path : resultList) {
             Image image = getImageByPath(path);
@@ -112,11 +97,6 @@ public class ImageGridAdapter extends BaseAdapter {
         return null;
     }
 
-    /**
-     * 设置数据集
-     *
-     * @param images
-     */
     public void setData(List<Image> images) {
         mSelectedImages.clear();
 
@@ -223,7 +203,7 @@ public class ImageGridAdapter extends BaseAdapter {
                 Picasso.with(mContext)
                         .load(imageFile)
                         .placeholder(R.drawable.default_error)
-                        .tag(MultiImageSelectorFragment.TAG)
+                        .tag(ImageSelectFragment.TAG)
                         .resize(mGridWidth, mGridWidth)
                         .centerCrop()
                         .into(image);
