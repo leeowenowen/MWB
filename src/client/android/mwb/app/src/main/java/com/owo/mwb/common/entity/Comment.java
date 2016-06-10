@@ -6,7 +6,7 @@ package com.owo.mwb.common.entity;
 public class Comment {
     private String id;
     private String userId;
-    private String dateTime;
+    private long createTime;
     private String content;
 
     public String getId() {
@@ -25,12 +25,12 @@ public class Comment {
         this.userId = userId;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public String getContent() {

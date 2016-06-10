@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -23,57 +22,50 @@ import com.owo.android.util.ContextManager;
 import com.owo.android.util.ui.DimensionUtil;
 import com.owo.android.util.ui.LayoutParamUtil;
 import com.owo.android.util.ui.LayoutUtil;
-import com.owo.components.BasePage;
 import com.owo.components.image_crop.ImageCropActivity;
 
-import java.util.ArrayList;
 import java.util.BitSet;
 
 /**
  * Created by wangli on 15-6-2.
  */
-public class ImageSelectPage extends BasePage {
+public class ImageSelectPage extends FrameLayout {
     private GridView mImageGridView;
-    private Button mBtnSelect;
 
     private boolean mIsWHEqual;
     private boolean mIsSingleSelectMode;
     private boolean mNeedCrop;
 
     public ImageSelectPage(Context context, boolean isWHEqual, boolean isSingleSelectMode, boolean needCrop) {
-        super(context, false);
+        super(context);
         mIsWHEqual = isWHEqual;
         mIsSingleSelectMode = isSingleSelectMode;
         mNeedCrop = needCrop;
 
-        mBtnSelect = new Button(context);
         mImageGridView = new GridView(context);
         mImageGridView.setNumColumns(3);
         mImageGridView.setAdapter(new ItemViewAdapter(queryAllImage()));
         mImageGridView.setHorizontalSpacing(0);
         mImageGridView.setVerticalSpacing(0);
-        setContentView(mImageGridView);
-        mBtnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<String> paths = new ArrayList<>();
-                for (int i = 0; i < mSelectedFlags.size(); ++i) {
-                    if (mSelectedFlags.get(i)) {
-                        mCursor.moveToPosition(i);
-                        String pathString = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                        paths.add(pathString);
-                    }
-                }
-                Intent data = new Intent();
-                data.putStringArrayListExtra("image_path", paths);
-                ContextManager.activity().setResult(100, data);
-                ContextManager.activity().finish();
-            }
-        });
-        setTitleRightExtension(mBtnSelect);
-        mBtnSelect.setText("确定");
-
-        setTitle("选择图片");
+        addView(mImageGridView);
+//        mBtnSelect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<String> paths = new ArrayList<>();
+//                for (int i = 0; i < mSelectedFlags.size(); ++i) {
+//                    if (mSelectedFlags.get(i)) {
+//                        mCursor.moveToPosition(i);
+//                        String pathString = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//                        paths.add(pathString);
+//                    }
+//                }
+//                Intent data = new Intent();
+//                data.putStringArrayListExtra("image_path", paths);
+//                ContextManager.activity().setResult(100, data);
+//                ContextManager.activity().finish();
+//            }
+//        });
+//        mBtnSelect.setText("确定");
     }
 
     private class ItemView extends FrameLayout {
@@ -154,7 +146,7 @@ public class ImageSelectPage extends BasePage {
                 itemView.mSelectView.setChecked(mSelectedFlags.get(i));
                 itemView.setTag(i);
                 final ItemView itemViewMark = itemView;
-                imageLoader.loadImage(path, new ImageSize(DimensionUtil.w(240), DimensionUtil.w(320)), new SimpleImageLoadingListener() {
+                imageLoader.loadImage(path, new ImageSize(DimensionUtil.w(mIsWHEqual ? 320 : 240), DimensionUtil.w(320)), new SimpleImageLoadingListener() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                         if ((int) (itemViewMark.getTag()) == i) {

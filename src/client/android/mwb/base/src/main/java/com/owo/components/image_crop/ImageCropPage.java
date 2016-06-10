@@ -5,20 +5,20 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.edmodo.cropper.CropImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.owo.android.util.ContextManager;
+import com.owo.android.util.iva.BitmapHelper;
 import com.owo.app.common.LoadingCtrl;
 import com.owo.base.async.TaskRunner;
-import com.owo.android.util.iva.BitmapHelper;
-import com.owo.components.BasePage;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ImageCropPage extends BasePage {
+public class ImageCropPage extends FrameLayout {
     private Button mBtnCrop;
     private CropImageView mCropImageView;
 
@@ -30,7 +30,6 @@ public class ImageCropPage extends BasePage {
         if (isWHEqual) {
             mCropImageView.setAspectRatio(1, 1);
         }
-        setTitleRightExtension(mBtnCrop);
         mBtnCrop.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +56,7 @@ public class ImageCropPage extends BasePage {
 
             }
         });
-        setContentView(mCropImageView);
+        addView(mCropImageView);
         ImageLoader.getInstance().loadImage(imagePath, new SimpleImageLoadingListener() {
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
@@ -65,6 +64,6 @@ public class ImageCropPage extends BasePage {
             }
         });
         mBtnCrop.setText("确定");
-        setTitle("裁剪图片");
+        //     setTitle("裁剪图片");
     }
 }

@@ -8,15 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.owo.app.common.OwoListView;
 import com.owo.mwb.R;
 
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by wangli on 16-6-5.
- */
-public class DisplayListView extends ListView {
+
+public class DisplayListView extends OwoListView {
     private DisplayAdapter mDisplayAdapter = new DisplayAdapter();
     private DisplayModel mDisplayModel = DisplayModel.instance();
 
@@ -51,7 +50,7 @@ public class DisplayListView extends ListView {
         public View getView(int position, View convertView, ViewGroup parent) {
             DisplayItemView itemView = null;
             if (convertView == null) {
-                itemView = new DisplayItemView(parent.getContext());//DisplayItemView) LayoutInflater.from(parent.getContext()).inflate(R.layout.display_list_item_layout, null);
+                itemView = new DisplayItemView(parent.getContext());
             } else {
                 itemView = (DisplayItemView) convertView;
             }

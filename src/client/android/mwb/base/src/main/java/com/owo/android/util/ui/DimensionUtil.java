@@ -41,4 +41,11 @@ public class DimensionUtil {
         double xdpi = displayMetrics().xdpi;
         return (float) (mm * xdpi * (1.0f / 25.4f));
     }
+
+    public static int w(int w){
+        return w;
+    }
+    public static int h(int h){
+        return h;
+    }
 }

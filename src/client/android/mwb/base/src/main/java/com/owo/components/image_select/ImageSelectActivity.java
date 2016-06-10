@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class ImageSelectActivity extends AppCompatActivity {
+import com.owo.app.common.OwoActivity;
+import com.owo.app.common.OwoBackOkActivity;
+
+public class ImageSelectActivity extends OwoBackOkActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
