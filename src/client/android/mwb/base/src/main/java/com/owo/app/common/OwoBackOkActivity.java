@@ -10,9 +10,9 @@ import com.owo.base.R;
 
 public class OwoBackOkActivity extends OwoActivity {
     private static final String TAG = OwoBackOkActivity.class.getSimpleName();
-    ImageView ivBack;
-    TextView tvTitle;
-    TextView tvOk;
+    protected ImageView ivBack;
+    protected TextView tvTitle;
+    protected TextView tvOk;
 
 
     @Override
@@ -41,9 +41,9 @@ public class OwoBackOkActivity extends OwoActivity {
         return R.layout.actionbar_back_title_ok;
     }
 
-    protected void setActionBarTitle(String title) {
+    protected void setActionBarTitle(int id) {
         try {
-            tvTitle.setText(title);
+            tvTitle.setText(id);
         } catch (Exception e) {
             Logger.e(TAG, "This Custom ActionBar doesn't have a TextView which Id is tv_actionbar_title");
         }

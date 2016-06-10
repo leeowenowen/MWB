@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -14,6 +15,8 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
@@ -22,15 +25,20 @@ import com.owo.android.util.ContextManager;
 import com.owo.android.util.ui.DimensionUtil;
 import com.owo.android.util.ui.LayoutParamUtil;
 import com.owo.android.util.ui.LayoutUtil;
+import com.owo.base.R;
 import com.owo.components.image_crop.ImageCropActivity;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by wangli on 15-6-2.
  */
-public class ImageSelectPage extends FrameLayout {
-    private GridView mImageGridView;
+public class ImageSelectPage extends LinearLayout {
+    GridView gridviewImgs;
+    ListView listviewFolders;
 
     private boolean mIsWHEqual;
     private boolean mIsSingleSelectMode;
@@ -41,38 +49,30 @@ public class ImageSelectPage extends FrameLayout {
         mIsWHEqual = isWHEqual;
         mIsSingleSelectMode = isSingleSelectMode;
         mNeedCrop = needCrop;
-
-        mImageGridView = new GridView(context);
-        mImageGridView.setNumColumns(3);
-        mImageGridView.setAdapter(new ItemViewAdapter(queryAllImage()));
-        mImageGridView.setHorizontalSpacing(0);
-        mImageGridView.setVerticalSpacing(0);
-        addView(mImageGridView);
-//        mBtnSelect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ArrayList<String> paths = new ArrayList<>();
-//                for (int i = 0; i < mSelectedFlags.size(); ++i) {
-//                    if (mSelectedFlags.get(i)) {
-//                        mCursor.moveToPosition(i);
-//                        String pathString = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
-//                        paths.add(pathString);
-//                    }
-//                }
-//                Intent data = new Intent();
-//                data.putStringArrayListExtra("image_path", paths);
-//                ContextManager.activity().setResult(100, data);
-//                ContextManager.activity().finish();
-//            }
-//        });
-//        mBtnSelect.setText("确定");
+        LayoutInflater.from(context).inflate(R.layout.image_select_page, this, true);
+        ButterKnife.bind(this);
+        gridviewImgs = (GridView) findViewById(R.id.gridview_imgs);
+        listviewFolders = (ListView) findViewById(R.id.listview_folders);
+        gridviewImgs.setAdapter(new ItemViewAdapter(queryAllImage()));
     }
 
-    private class ItemView extends FrameLayout {
+    public ArrayList<String> getSelectedImages() {
+        ArrayList<String> paths = new ArrayList<>();
+        for (int i = 0; i < mSelectedFlags.size(); ++i) {
+            if (mSelectedFlags.get(i)) {
+                mCursor.moveToPosition(i);
+                String pathString = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                paths.add(pathString);
+            }
+        }
+        return paths;
+    }
+
+    private class SelectImageItemView extends FrameLayout {
         ImageView mImageView;
         CheckBox mSelectView;
 
-        public ItemView(Context context) {
+        public SelectImageItemView(Context context) {
             super(context);
 
             mImageView = new ImageView(context);
@@ -129,33 +129,33 @@ public class ImageSelectPage extends FrameLayout {
 
         @Override
         public View getView(final int i, View view, ViewGroup viewGroup) {
-            ItemView itemView = null;
+            SelectImageItemView selectImageItemView = null;
             if (view == null) {
-                itemView = new ItemView(getContext());
+                selectImageItemView = new SelectImageItemView(getContext());
                 AbsListView.LayoutParams lp = new AbsListView.LayoutParams(DimensionUtil.w(240), DimensionUtil.h(320));
-                itemView.setLayoutParams(lp);
+                selectImageItemView.setLayoutParams(lp);
             } else {
-                itemView = (ItemView) view;
+                selectImageItemView = (SelectImageItemView) view;
             }
             if (mCursor.moveToPosition(i)) {
                 String path = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
                 path = "file://" + path;
                 final String selectPath = path;
                 final ImageLoader imageLoader = ImageLoader.getInstance();
-                itemView.mImageView.setImageBitmap(null);
-                itemView.mSelectView.setChecked(mSelectedFlags.get(i));
-                itemView.setTag(i);
-                final ItemView itemViewMark = itemView;
+                selectImageItemView.mImageView.setImageBitmap(null);
+                selectImageItemView.mSelectView.setChecked(mSelectedFlags.get(i));
+                selectImageItemView.setTag(i);
+                final SelectImageItemView selectImageItemViewMark = selectImageItemView;
                 imageLoader.loadImage(path, new ImageSize(DimensionUtil.w(mIsWHEqual ? 320 : 240), DimensionUtil.w(320)), new SimpleImageLoadingListener() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if ((int) (itemViewMark.getTag()) == i) {
-                            itemViewMark.mImageView.setImageBitmap(loadedImage);
+                        if ((int) (selectImageItemViewMark.getTag()) == i) {
+                            selectImageItemViewMark.mImageView.setImageBitmap(loadedImage);
                         }
                     }
                 });
                 if (mNeedCrop) {
-                    itemView.mImageView.setOnClickListener(new View.OnClickListener() {
+                    selectImageItemView.mImageView.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(ContextManager.activity(), ImageCropActivity.class);
@@ -165,14 +165,14 @@ public class ImageSelectPage extends FrameLayout {
                         }
                     });
                 }
-                itemView.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                selectImageItemView.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         mSelectedFlags.set(i);
                     }
                 });
             }
-            return itemView;
+            return selectImageItemView;
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.owo.mwb.display;
 
 import com.owo.mwb.common.entity.Comment;
-import com.owo.mwb.common.entity.Image;
+import com.owo.android.common.Image;
 
 import java.util.List;
 

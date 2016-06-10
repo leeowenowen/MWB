@@ -1,10 +1,8 @@
 package com.owo.mwb.user;
 
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.Expose;
-import com.owo.mwb.common.entity.Image;
+import com.owo.android.common.Image;
 
 import java.math.BigDecimal;
 

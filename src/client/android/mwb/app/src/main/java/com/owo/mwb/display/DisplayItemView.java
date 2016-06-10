@@ -14,7 +14,7 @@ import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.owo.android.util.log.Logger;
 import com.owo.mwb.R;
-import com.owo.mwb.common.entity.Image;
+import com.owo.android.common.Image;
 
 import java.util.List;
 

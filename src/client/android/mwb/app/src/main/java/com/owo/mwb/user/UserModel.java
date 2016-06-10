@@ -1,11 +1,6 @@
 package com.owo.mwb.user;
 
-import com.owo.mwb.common.entity.Comment;
-import com.owo.mwb.common.entity.Image;
-import com.owo.mwb.display.DisplayItem;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 /**
