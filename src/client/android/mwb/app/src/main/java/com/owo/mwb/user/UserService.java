@@ -11,9 +11,6 @@ import retrofit2.http.GET;
  * Created by wangli on 16-6-5.
  */
 public interface UserService {
-    @GET("/service/user/get")
-    void getUserInfo(int id, Callback<List<User>> callback);
-
     @GET("/service/user/register")
     void register(User user, Callback<User> callback);
 
@@ -22,4 +19,8 @@ public interface UserService {
 
     @GET("/service/user/logout")
     void logout(User user, Callback<User> callback);
+
+    @GET("/service/user/get")
+    void getUserInfo(int id, Callback<List<User>> callback);
+
 }

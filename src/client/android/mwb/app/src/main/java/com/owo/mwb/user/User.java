@@ -7,7 +7,8 @@ import com.owo.android.common.Image;
 import java.math.BigDecimal;
 
 public class User {
-    public String id;
+    private String id;
+    private String phoneNumber;
     private String username;
     private String nickname;
     private String password;
@@ -15,10 +16,10 @@ public class User {
     private String type;
     private long createTime;
     private long updateTime;
+    private long lastLoginTime;
 
-    private String avatar;
     @Expose(serialize = false, deserialize = false)
-    private Image photo;
+    private Image avatar;
     private Gender gender;
     private String country;
     private String province;
@@ -29,7 +30,14 @@ public class User {
     private BigDecimal mapY;
     private long coordinatesUpdateTime;
     private String remark;
-    private long lastLoginTime;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getId() {
         return id;
@@ -95,11 +103,11 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public String getAvatar() {
+    public Image getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Image avatar) {
         this.avatar = avatar;
     }
 

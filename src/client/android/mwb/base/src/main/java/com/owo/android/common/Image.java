@@ -33,9 +33,6 @@ public class Image extends com.owo.base.async.loadable.Loadable {
 
     public void setBmp(Bitmap bmp) {
         this.bmp = bmp;
-        if (bmp != null) {
-            setState(State.LOADED_SUCCESS);
-        }
     }
 
 }

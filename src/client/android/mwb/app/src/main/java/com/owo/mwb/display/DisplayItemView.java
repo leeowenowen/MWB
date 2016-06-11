@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.owo.android.util.log.Logger;
+import com.owo.base.async.loadable.Loadable;
 import com.owo.mwb.R;
 import com.owo.android.common.Image;
 
@@ -71,6 +72,7 @@ public class DisplayItemView extends LinearLayout {
 
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                         image.setBmp(loadedImage);
+                        image.setState(Loadable.State.LOADED_SUCCESS);
                         if (imgView.getTag() == tag) {
                             imgView.setImageBitmap(loadedImage);
                         }

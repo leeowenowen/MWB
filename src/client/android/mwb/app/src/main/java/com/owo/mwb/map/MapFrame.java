@@ -41,6 +41,7 @@ public class MapFrame extends LinearLayout {
 
     private void initComponents(Context context) {
         mMapView = new MapView(context);
+        mMapView.setBackgroundColor(Color.TRANSPARENT);
         mMap = mMapView.getMap();
         mLocationClient = new AMapLocationClient(context.getApplicationContext());
         //声明mLocationOption对象
@@ -103,6 +104,7 @@ public class MapFrame extends LinearLayout {
     private void setupListeners() {
         mOnLocationChangedListener = new OnLocationChangedListenerWrapper();
         mLocationClient.setLocationListener(mOnLocationChangedListener);
+        mOnLocationChangedListener.activate();
 
         LocationSource locationSource = new LocationSource() {
             @Override
@@ -118,7 +120,7 @@ public class MapFrame extends LinearLayout {
             }
         };
         mMap.setLocationSource(locationSource);
-       // mMap.setMyLocationEnabled(true);
+        // mMap.setMyLocationEnabled(true);
         //mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 1000, null);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
