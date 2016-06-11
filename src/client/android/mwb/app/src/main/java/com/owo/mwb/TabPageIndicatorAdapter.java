@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.amap.api.maps.SupportMapFragment;
 import com.owo.mwb.display.DisplayListView;
 
 /**
@@ -28,7 +29,7 @@ public class TabPageIndicatorAdapter extends FragmentPagerAdapter {
             case 0:
                 return new ContentViewFragment().withContentView(new DisplayListView(context));
             case 1:
-                return new DummyFragment("1xxx").withColor(Color.BLUE);
+                return new MapFragment();
             case 2:
                 return new DummyFragment("2xxx").withColor(Color.YELLOW);
             default:

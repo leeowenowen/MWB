@@ -1,5 +1,7 @@
 package com.owo.base.async.loadable;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by wangli on 15-7-1.
  */
@@ -11,6 +13,7 @@ public class Loadable {
         LOADED_SUCCESS,//
     }
 
+    @Expose(serialize = false, deserialize = false)
     private State mState = State.NONE;
 
     public void setState(State state) {

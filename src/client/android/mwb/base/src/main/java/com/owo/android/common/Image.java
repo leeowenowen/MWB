@@ -2,6 +2,8 @@ package com.owo.android.common;
 
 import android.graphics.Bitmap;
 
+import com.google.gson.annotations.Expose;
+
 
 /**
  * Created by wangli on 16-6-5.
@@ -10,6 +12,7 @@ public class Image extends com.owo.base.async.loadable.Loadable {
 
     private String url;
 
+    @Expose(serialize = false, deserialize = false)
     private Bitmap bmp;
 
     public Image(String url) {
@@ -30,7 +33,7 @@ public class Image extends com.owo.base.async.loadable.Loadable {
 
     public void setBmp(Bitmap bmp) {
         this.bmp = bmp;
-        if(bmp != null){
+        if (bmp != null) {
             setState(State.LOADED_SUCCESS);
         }
     }
